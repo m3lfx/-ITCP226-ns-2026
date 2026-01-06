@@ -36,6 +36,6 @@ class ArtistController extends Controller
     {
         // dd($id);
         $artist = Artist::find($id);
-        dd($artist->name);
+        return view('artist.edit', compact('artist'));
     }
 }
