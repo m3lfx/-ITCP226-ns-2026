@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('body')
-    <div><a class="btn btn-primary " href="{{ url('/artist/create') }}" aria-disabled="true">create Artist</a></div>
+    <div><a class="btn btn-primary " href="{{ url('/artists/create') }}" aria-disabled="true">create Artist</a></div>
     <table class="table table-striped table-hover">
         @foreach ($artists as $artist)
             <tr>

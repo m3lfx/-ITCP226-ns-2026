@@ -30,6 +30,7 @@ class ArtistController extends Controller
         $artist->country = $request->country;
         $artist->img_path = $request->image;
         $artist->save();
+        return redirect()->route('artist.index');
     }
 
     public function edit($id)
