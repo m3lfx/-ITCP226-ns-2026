@@ -31,4 +31,11 @@ class ArtistController extends Controller
         $artist->img_path = $request->image;
         $artist->save();
     }
+
+    public function edit($id)
+    {
+        // dd($id);
+        $artist = Artist::find($id);
+        dd($artist->name);
+    }
 }
