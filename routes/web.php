@@ -24,3 +24,5 @@ Route::get('/artists/create', [ArtistController::class, 'create']);
 Route::post('/artists', [ArtistController::class, 'store']);
 Route::get('/artists/create', [ArtistController::class, 'create']);
 Route::get('/artists/{id}/edit', [ArtistController::class, 'edit']);
+Route::post('/artists/{id}/update', [ArtistController::class, 'update']);
+Route::get('/artists/{id}/delete', [ArtistController::class, 'delete']);

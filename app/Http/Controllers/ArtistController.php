@@ -38,4 +38,21 @@ class ArtistController extends Controller
         $artist = Artist::find($id);
         return view('artist.edit', compact('artist'));
     }
+
+    public function update(Request $request, $id)
+    {
+        // dd($request, $id);
+        $artist = Artist::find($id);
+        $artist->name = $request->name;
+        $artist->country = $request->country;
+        $artist->img_path = $request->image;
+        $artist->save();
+        return redirect('/artists');
+    }
+
+    public function delete($id)
+    {
+        Artist::destroy($id);
+        return redirect('/artists');
+    }
 }
