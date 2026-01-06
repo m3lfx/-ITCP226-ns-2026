@@ -2,7 +2,7 @@
 
 @section('body')
     {{-- {{dd($artist)}} --}}
-    <form action="{{ url('/artist/' . $artist->id . '/update') }}" method="POST">
+    <form action="{{ url('/artists/' . $artist->id . '/update') }}" method="POST">
         @csrf
 
         <input type="text" class="form-control" name="name" value="{{ $artist->name }}">
