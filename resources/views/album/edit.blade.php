@@ -1,22 +1,26 @@
 @extends('layouts.base')
 
 @section('body')
-    
+    {{-- dd($artists, $album) --}}
     <div class="container">
-        <form action="{{ route('album.update', ['id' => $album->id]) }}" method="POST">
+        <form action="{{ route('albums.update', ['album' => $album->id]) }}" method="POST">
             @csrf
+            @method('PUT')
 
             <div class="mb-3">
                 <label for="album_name" class="form-label">Album Name</label>
-                <input type="text" class="form-control" id="album_name" placeholder="album title" name="title" value="{{$album->title}}">
+                <input type="text" class="form-control" id="album_name" placeholder="album title" name="title"
+                    value="{{ $album->title }}">
             </div>
             <div class="mb-3">
                 <label for="genre" class="form-label">genre</label>
-                <input type="text" class="form-control" id="genre" placeholder="kpop pop" name="genre" value="{{$album->genre}}">
+                <input type="text" class="form-control" id="genre" placeholder="kpop pop" name="genre"
+                    value="{{ $album->genre }}">
             </div>
             <div class="mb-3">
                 <label for="date_released" class="form-label">Date Released</label>
-                <input type="date" class="form-control" id="date_released" name="date_released" value="{{$album->date_released}}">
+                <input type="date" class="form-control" id="date_released" name="date_released"
+                    value="{{ $album->date_released }}">
             </div>
             <div class="mb-3">
                 <label for="artists" class="form-label">Pick An Artist</label>
