@@ -22,7 +22,7 @@
                     <form action="{{ route('albums.destroy', ['album' => $album->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-primary btn-sm"><i class="fas fa-trash"
+                        <button type="submit" class="btn btn-outline-light"><i class="fas fa-trash"
                                 style="color:red"></i></button>
                     </form>
 
@@ -31,4 +31,5 @@
         @endforeach
 
     </table>
+    <div class="center-horizontal">{{ $albums->links() }}</div>
 @endsection

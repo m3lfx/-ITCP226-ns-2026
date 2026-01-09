@@ -20,7 +20,7 @@ class AlbumController extends Controller
             ->select('al.id', 'al.title', 'ar.name', 'al.genre', 'al.date_released',)
             ->orderBy('al.id', 'DESC')
             // ->toSql();
-            ->get();
+            ->paginate(10);
         // dd($albums);
         return view('album.index', compact('albums'));
     }
