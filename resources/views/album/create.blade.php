@@ -3,7 +3,7 @@
 @section('body')
     {{-- {{ dd($artists) }} --}}
     <div class="container">
-        <form action="{{ route('album.store') }}" method="POST">
+        <form action="{{ route('albums.store') }}" method="POST">
             @csrf
 
             <div class="mb-3">

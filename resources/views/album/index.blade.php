@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('body')
-    <div><a class="btn btn-primary " href="{{ url('/album/create') }}" aria-disabled="true">create album</a></div>
+    <div><a class="btn btn-primary " href="{{ url('/albums/create') }}" aria-disabled="true">create album</a></div>
     <table class="table table-striped table-hover">
         <thead>
             <th>id</th>
