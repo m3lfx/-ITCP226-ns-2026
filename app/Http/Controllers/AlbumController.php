@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Artist;
+use App\Models\Album;
 use Illuminate\Support\Facades\DB;
 
 class AlbumController extends Controller
@@ -38,7 +39,13 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $album = Album::create([
+            'title' => $request->title,
+            'genre' => $request->genre,
+            'date_released' => $request->date_released,
+            'artist_id' => $request->artist_id,
+        ]);
+        return redirect()->route('albums.index');
     }
 
     /**
