@@ -26,7 +26,7 @@
                 <label for="artists" class="form-label">Pick An Artist</label>
                 <select class="form-select" aria-label="Default select example" name="artist_id">
             </div>
-            <option selected>Open this select menu</option>
+            <option selected value="{{ $album->artist_id }}">{{ $album->name }}</option>
             @foreach ($artists as $artist)
                 <option value="{{ $artist->id }}">{{ $artist->name }}</option>
             @endforeach
