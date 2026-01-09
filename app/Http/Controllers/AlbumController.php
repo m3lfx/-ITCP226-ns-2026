@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Album;
+use Illuminate\Support\Facades\DB;
 
 class AlbumController extends Controller
 {
@@ -12,7 +13,14 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        $albums = Album::all();
+        // $albums = Album::all();
+        $albums = DB::table('artists AS ar')
+            ->join('albums AS al', 'ar.id', '=', 'al.artist_id')
+            ->select('al.id', 'al.title', 'ar.name', 'al.genre', 'al.date_released',)
+            ->orderBy('al.id', 'DESC')
+            // ->toSql();
+            ->get();
+        // dd($albums);
         return view('album.index', compact('albums'));
     }
 
