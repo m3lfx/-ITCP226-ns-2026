@@ -12,10 +12,12 @@ class SongController extends Controller
      */
     public function index()
     {
-        $songs = DB::table('songs')
-            ->join('albums', 'albums.id', '=', 'songs.album_id')
-            ->select('songs.id', 'songs.title as song_name', 'songs.description', 'albums.title as album_title')
-            ->orderBy('songs.id', 'DESC')
+        $songs = DB::table('songs as s')
+            ->join('albums as al', 'al.id', '=', 's.album_id')
+            ->join('artists as ar', 'al.artist_id', '=', 'ar.id')
+            ->select('s.id', 's.title as song_name', 's.description', 'al.title as album_title', 'ar.name')
+            ->orderBy('s.id', 'DESC')
+            // ->get();
             ->paginate(15);
         // dd($songs);
         return view('song.index', compact('songs'));
