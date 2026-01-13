@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Album;
+use App\Models\Song;
 
 class SongController extends Controller
 {
@@ -38,7 +39,18 @@ class SongController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'title' => ['required', 'max:30'],
+            'description' => ['required', 'min:5', 'max:200'],
+            'album_id' => 'required'
+        ]);
+
+        $song = Song::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'album_id' => $request->album_id
+        ]);
+        return redirect()->route('songs.index');
     }
 
     /**
