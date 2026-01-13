@@ -15,13 +15,15 @@ class SongController extends Controller
      */
     public function index()
     {
-        $songs = DB::table('songs as s')
-            ->join('albums as al', 'al.id', '=', 's.album_id')
-            ->join('artists as ar', 'al.artist_id', '=', 'ar.id')
-            ->select('s.id', 's.title as song_name', 's.description', 'al.title as album_title', 'ar.name')
-            ->orderBy('s.id', 'DESC')
-            // ->get();
-            ->paginate(15);
+        $songs = Song::withTrashed()->get();
+        // dd($songs);
+        // $songs = DB::table('songs as s')
+        // ->join('albums as al', 'al.id', '=', 's.album_id')
+        // ->join('artists as ar', 'al.artist_id', '=', 'ar.id')
+        // ->select('s.id', 's.title as song_name', 's.description', 'al.title as album_title', 'ar.name')
+        // ->orderBy('s.id', 'DESC')
+        // ->get();
+        // ->paginate(15);
         // dd($songs);
         return view('song.index', compact('songs'));
     }
@@ -107,6 +109,13 @@ class SongController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $song = Song::destroy($id);
+        return redirect()->back();
+    }
+
+    public function restore($id)
+    {
+        $song = Song::withTrashed()->where('id', $id)->restore();
+        return redirect()->route('songs.index');
     }
 }
