@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SongController extends Controller
 {
@@ -11,7 +12,13 @@ class SongController extends Controller
      */
     public function index()
     {
-        //
+        $songs = DB::table('songs')
+            ->join('albums', 'albums.id', '=', 'songs.album_id')
+            ->select('songs.id', 'songs.title as song_name', 'songs.description', 'albums.title as album_title')
+            ->orderBy('songs.id', 'DESC')
+            ->paginate(15);
+        // dd($songs);
+        return view('song.index', compact('songs'));
     }
 
     /**
