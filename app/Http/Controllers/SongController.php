@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Album;
 use App\Models\Song;
+use Validator;
 
 class SongController extends Controller
 {
@@ -66,7 +67,12 @@ class SongController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $song = Song::find($id);
+        $album = Album::where('id', $song->album_id)->first();
+
+        $albums = Album::where('id', '<>', $song->album_id)->get();
+
+        return view('song.edit', compact('albums', 'song', 'album'));
     }
 
     /**
@@ -74,7 +80,26 @@ class SongController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        $rules = [
+            'title' => ['required', 'max:30'],
+            'description' => ['required', 'min:5', 'max:200'],
+            'album_id' => 'required'
+        ];
+        $messages = ['title.required' => 'ito ay  kailangan', 'description.required' => 'may laman dapat', 'min' => 'too short'];
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $song = Song::where('id', $id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'album_id' => $request->album_id
+        ]);
+        return redirect()->route('songs.index');
     }
 
     /**
