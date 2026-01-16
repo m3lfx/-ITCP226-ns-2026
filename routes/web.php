@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongController;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,5 +29,9 @@ Route::get('/artists/{id}/edit', [ArtistController::class, 'edit']);
 Route::post('/artists/{id}/update', [ArtistController::class, 'update']);
 Route::get('/artists/{id}/delete', [ArtistController::class, 'delete']);
 Route::get('/songs/{id}/restore',  [SongController::class, 'restore'])->name('songs.restore');
+
+Route::view('/register', 'user.register');
+Route::post('/user/register', [UserController::class, 'register'])->name('user.register');
+Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
 Route::resource('albums', AlbumController::class);
 Route::resource('songs', SongController::class);

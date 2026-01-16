@@ -5,19 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use Auth;
+use App\Models\User;
+use App\Models\Listener;
 
 class UserController extends Controller
 {
     public function register(Request $request)
     {
-        // dd(Hash::make($request->password));
-        // dd($request->all());
-        // $validated = $request->validate([
-        //     'email' => 'required|email',
-        //     'password' => 'required|min:6',
-        //     'lname' => 'required|alpha',
-        //     'img_path' => 'required'
-        // ]);
+
         $rules = [
             'email' => 'required|email',
             'password' => 'required|min:6',
@@ -26,7 +21,7 @@ class UserController extends Controller
         ];
         $messages = [
             'required' => 'The :attribute ay may content',
-            'email' => 'ang :attribute format ay mali kamote ka',
+            'email' => 'ang :attribute format ay mali ka',
             'password' => 'dapat anim o mahigit na characters',
             'email.required' => 'ilagay mo email mo'
         ];
@@ -45,7 +40,6 @@ class UserController extends Controller
             'name' => $request->fname . " " . $request->lname
         ]);
 
-        // $path = $request->file('img_path')->store('images');
 
         $path = $request->file('img_path')->storeAs(
             'public/images',
@@ -64,5 +58,14 @@ class UserController extends Controller
         // dd($listener);
         Auth::login($user);
         return redirect()->route('user.profile');
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        // dd($user);
+        $listener = Listener::where('user_id', Auth::id())->first(['fname', 'lname', 'address', 'img_path']);
+        // dd($listener);
+        return view('user.profile', compact('user', 'listener'));
     }
 }
