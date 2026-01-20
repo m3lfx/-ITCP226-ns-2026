@@ -6,6 +6,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListenerController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,7 +30,8 @@ Route::view('/user/login', 'user.login');
 Route::post('/user/register', [UserController::class, 'register'])->name('user.register');
 
 Route::post('signin', [UserController::class, 'postSignin'])->name('user.signin');
-
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/search', [HomeController::class, 'search'])->name('search');
 
 
 Route::middleware(['auth'])->group(function () {
