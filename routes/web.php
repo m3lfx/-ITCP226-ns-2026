@@ -5,6 +5,7 @@ use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\SongController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListenerController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,9 +41,13 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/artists/{id}/update', [ArtistController::class, 'update']);
     Route::get('/artists/{id}/delete', [ArtistController::class, 'delete']);
     Route::get('/songs/{id}/restore',  [SongController::class, 'restore'])->name('songs.restore');
+    Route::get('/listeners/{id}/restore',  [ListenerController::class, 'restore'])->name('listeners.restore');
+
+    Route::get('/listeners/add-album', [ListenerController::class, 'addAlbums'])->name('listeners.addAlbums');
 
     Route::resource('songs', SongController::class);
     Route::resource('albums', AlbumController::class);
+    Route::resource('listeners', ListenerController::class);
     Route::get('logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
 });
