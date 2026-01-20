@@ -15,8 +15,8 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- <form action="{{ route('listeners.addAlbumListener') }}" method="POST"> --}}
-                <form action="" method="POST">
+                <form action="{{ route('listeners.addAlbumListener') }}" method="POST">
+                    {{-- <form action="" method="POST"> --}}
                     @csrf
                     @foreach ($albums as $album)
                         <tr>

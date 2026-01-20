@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Listener;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class ListenerController extends Controller
 {
@@ -84,5 +85,22 @@ class ListenerController extends Controller
         // dd($albums);
 
         return view('listener.add_album', compact('albums'));
+    }
+
+    public function addAlbumListener(Request $request)
+    {
+        // dd(Auth::id());
+        // $listener_id = 1;
+        $listener = Listener::where('user_id', Auth::id())->first();
+        // dd($request->album_id);
+        foreach ($request->album_id as $album_id) {
+            // dump($album_id);
+            DB::table('album_listener')->insert([
+                'album_id' => $album_id,
+                'listener_id' => $listener->id,
+                'created_at' => now()
+            ]);
+        }
+        return redirect()->route('listeners.index');
     }
 }

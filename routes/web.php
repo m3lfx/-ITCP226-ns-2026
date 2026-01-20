@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/listeners/{id}/restore',  [ListenerController::class, 'restore'])->name('listeners.restore');
 
     Route::get('/listeners/add-album', [ListenerController::class, 'addAlbums'])->name('listeners.addAlbums');
+    Route::post('/listeners/add-album', [ListenerController::class, 'addAlbumListener'])->name('listeners.addAlbumListener');
 
     Route::resource('songs', SongController::class);
     Route::resource('albums', AlbumController::class);
